@@ -15,7 +15,9 @@ const {
   validate,
 } = require('../validators/projectValidator');
 const auth = require('../middleware/auth');
+const { apiLimiter } = require('../middleware/rateLimiter');
 
+router.use(apiLimiter);
 router.use(auth);
 
 router.get('/', getProjects);

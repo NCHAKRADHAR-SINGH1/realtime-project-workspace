@@ -18,6 +18,7 @@ const {
   validate,
 } = require('../validators/taskValidator');
 const auth = require('../middleware/auth');
+const { apiLimiter } = require('../middleware/rateLimiter');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -46,6 +47,7 @@ const upload = multer({
   fileFilter,
 });
 
+router.use(apiLimiter);
 router.use(auth);
 
 router.get('/project/:projectId', getTasksByProject);
