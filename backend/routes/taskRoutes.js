@@ -33,7 +33,7 @@ const fileFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|gif|pdf|doc|docx|xls|xlsx|txt|zip/;
   const extName = allowedTypes.test(path.extname(file.originalname).toLowerCase());
   const mimeType = allowedTypes.test(file.mimetype);
-  if (extName || mimeType) {
+  if (extName && mimeType) {
     cb(null, true);
   } else {
     cb(new Error('Invalid file type. Only images, PDFs, documents, and archives are allowed.'));
